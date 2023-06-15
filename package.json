@@ -1,0 +1,8 @@
+{
+  "name": "atom-challenge",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:randiguarcas/atom-challenge.git",
+  "author": "Randi Guarcas <rguarcas18@gmail.com>",
+  "license": "MIT"
+}
