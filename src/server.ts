@@ -1,10 +1,12 @@
-import express, { Express } from "express";
-import { taskRoute } from "./routes";
+import express, { Express, Request, Response } from "express";
+import { taskRoute, welcomeRoute } from "./routes";
 
 const app: Express = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
+
+app.use("/", welcomeRoute);
 app.use("/tasks", taskRoute);
 
 app.listen(port, () => {
