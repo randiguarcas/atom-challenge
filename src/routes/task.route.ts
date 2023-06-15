@@ -22,8 +22,8 @@ router.post("/", async (req: Request, res: Response) => {
   try {
     const task: Task = req.body;
     const response = await taskController.postTaskAction(task);
-    
-    res.send(response);
+
+    res.status(201).json({ ...response });
   } catch (error) {
     throw error;
   }

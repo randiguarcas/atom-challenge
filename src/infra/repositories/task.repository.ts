@@ -1,10 +1,13 @@
 import { db } from "../../utils/firebase";
 import Task from "../../interfaces/Task";
 
-const getAll = () => {
-  return {
-    id: 1,
-  };
+const getAll = async () => {
+  let promiseTasks: any[] = [];
+  const snapshot = await db.collection("tasks").get();
+  snapshot.forEach((doc) => promiseTasks.push(doc.data()));
+  
+  const tasks = await Promise.all(promiseTasks);
+  return tasks;
 };
 
 const createTask = async (task: Task) => {

@@ -13,8 +13,8 @@ export class TaskImpl {
   title: string;
   description: string;
   status: TaskStatus;
-  createdAt?: Timestamp | Date | undefined;
-  updatedAt?: Timestamp | Date | undefined;
+  createdAt: Timestamp | Date | undefined;
+  updatedAt: Timestamp | Date | undefined;
   slugify: string;
 
   constructor(task: Task) {
