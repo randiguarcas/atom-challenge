@@ -9,7 +9,7 @@ router.get("/", async (req: Request, res: Response) => {
     const response = await taskController.getAllTasksAction();
     res.send(response);
   } catch (error) {
-    console.error("Error fetching task:", error);
+    console.error("Error fetching tasks:", error);
     res.status(500).send("Internal Server Error");
   }
 });
@@ -21,7 +21,7 @@ router.post("/", async (req: Request, res: Response) => {
 
     res.status(201).json({ ...response });
   } catch (error) {
-    console.error("Error fetching task:", error);
+    console.error("Error creating task:", error);
     res.status(500).send("Internal Server Error");
   }
 });
@@ -56,7 +56,7 @@ router.put("/:id", async (req: Request, res: Response) => {
 
     res.status(200).json({ ...response });
   } catch (error) {
-    console.error("Error fetching task:", error);
+    console.error("Error updating task:", error);
     res.status(500).send("Internal Server Error");
   }
 });
@@ -74,7 +74,7 @@ router.delete("/:id", async (req: Request, res: Response) => {
 
     res.status(200).json({ delete: true });
   } catch (error) {
-    console.error("Error fetching task:", error);
+    console.error("Error deleting fetching task:", error);
     res.status(500).send("Internal Server Error");
   }
 });
