@@ -3,9 +3,9 @@ import { v4 as uuidv4 } from "uuid";
 import Task, { TaskStatus } from "../interfaces/Task";
 import createSlug from "../utils/slugify";
 import dayjs from "dayjs";
-import { CustomTimestamp } from "../interfaces/Task";
+
 /**
- * Consider TaskImpl as a Task Entity or Task Aggregate according to the case
+ * TODO: Consider TaskImpl as a Task Entity or Task Aggregate according to the case
  */
 
 export class TaskImpl {
@@ -16,6 +16,7 @@ export class TaskImpl {
   createdAt: Timestamp | Date | undefined;
   updatedAt: Timestamp | Date | undefined;
   slugify: string;
+  enabled: boolean | undefined;
 
   constructor(task: Task) {
     this.id = task.id || uuidv4();
@@ -31,6 +32,8 @@ export class TaskImpl {
     this.updatedAt = task.createdAt
       ? this.createTimestamp(task.createdAt)
       : Timestamp.now();
+    
+    this.enabled = task.enabled || true;
   }
 
   private createTimestamp(timestamp: Timestamp | Date): Date {

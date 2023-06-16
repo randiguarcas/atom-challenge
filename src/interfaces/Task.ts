@@ -17,6 +17,7 @@ interface Task {
   status: TaskStatus;
   createdAt?: Timestamp | Date | undefined;
   updatedAt?: Timestamp | Date | undefined;
+  enabled?: boolean | undefined;
 }
 
 export default Task;

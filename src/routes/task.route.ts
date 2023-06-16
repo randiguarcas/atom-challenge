@@ -9,13 +9,9 @@ router.get("/", async (req: Request, res: Response) => {
     const response = await taskController.getAllTasksAction();
     res.send(response);
   } catch (error) {
-    console.log(error);
+    console.error("Error fetching task:", error);
+    res.status(500).send("Internal Server Error");
   }
-});
-
-router.get("/:id", (req: Request, res: Response) => {
-  const id: string = req.params.id;
-  res.send("Hello from route" + id);
 });
 
 router.post("/", async (req: Request, res: Response) => {
@@ -25,7 +21,61 @@ router.post("/", async (req: Request, res: Response) => {
 
     res.status(201).json({ ...response });
   } catch (error) {
-    throw error;
+    console.error("Error fetching task:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+router.get("/:id", async (req: Request, res: Response) => {
+  try {
+    const id: string = req.params.id;
+
+    const response = await taskController.getTasksAction(id);
+    if (!response) {
+      res.status(404).send("Task not found");
+      return;
+    }
+
+    res.status(200).json({ ...response });
+  } catch (error) {
+    console.error("Error fetching task:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+router.put("/:id", async (req: Request, res: Response) => {
+  try {
+    const task: Task = req.body;
+    const id: string = req.params.id;
+
+    const response = await taskController.putTaskAction(id, task);
+    if (!response) {
+      res.status(404).send("Task not found");
+      return;
+    }
+
+    res.status(200).json({ ...response });
+  } catch (error) {
+    console.error("Error fetching task:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+router.delete("/:id", async (req: Request, res: Response) => {
+  try {
+    const task: Task = req.body;
+    const id: string = req.params.id;
+
+    const response = await taskController.deleteTaskAction(id, task);
+    if (!response) {
+      res.status(404).send("Task not found");
+      return;
+    }
+
+    res.status(200).json({ delete: true });
+  } catch (error) {
+    console.error("Error fetching task:", error);
+    res.status(500).send("Internal Server Error");
   }
 });
 
